@@ -1,3 +1,4 @@
+# vpc
 resource "aws_vpc" "main-vpc" {
     cidr_block = var.vpc_cidr
     tags = {
@@ -5,6 +6,7 @@ resource "aws_vpc" "main-vpc" {
     }
 }
 
+# IGW
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.main-vpc.id
 
@@ -13,6 +15,7 @@ resource "aws_internet_gateway" "internet_gateway" {
   }
 }
 
+# Public Subnets
 resource "aws_subnet" "public_a" {
   vpc_id     = aws_vpc.main-vpc.id
   cidr_block = var.public_a_cidr
@@ -45,7 +48,7 @@ availability_zone = "${var.region}c"
     Name = "Talent-academy-public-c"
   }
 }
-
+#  Private Subnets
 resource "aws_subnet" "private_a" {
   vpc_id     = aws_vpc.main-vpc.id
   cidr_block = var.private_a_cidr
